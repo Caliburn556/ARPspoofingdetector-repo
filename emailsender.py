@@ -20,9 +20,10 @@ log_file = "arp_spoofing_log.txt"
 # Email details
 smtp_server = "smtp.gmail.com"
 smtp_port = 587
-email_user = "kowwaski@gamil.com"
-email_password = "qygi vyad uclv xowy"
-email_to = "isaac.kipruto@strathmore.edu"
+email_user = "isaac.kipruto@strathmore.edu"
+email_password = "uzjr mofo ysqt yajl"
+email_to = "kowwaski@gmail.com"
+
 
 
 def send_email(source_ip, source_mac):
