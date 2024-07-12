@@ -90,4 +90,5 @@ To set up and configure the ARP Spoofing Detector:
 4. If such a discrepancy is found, it logs the details, sends an email notification, and updates the set of reported attackers to avoid duplicate notifications.
 5. Finally, the script starts sniffing for ARP packets and processes them as they are captured.
 
-This ARP Spoofing Detector script provides a robust solution for detecting and alerting on ARP spoofing attempts within a network. By following the setup and configuration steps, you can adapt it to your specific network environment and security requirements.
+### Screenshot of the alert email sent  when ARP spoofing is detected
+
