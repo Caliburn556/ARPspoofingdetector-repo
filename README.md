@@ -91,4 +91,6 @@ To set up and configure the ARP Spoofing Detector:
 5. Finally, the script starts sniffing for ARP packets and processes them as they are captured.
 
 ### Screenshot of the alert email sent  when ARP spoofing is detected
+![image](https://github.com/user-attachments/assets/b1c4bd92-a05c-4ece-9f5a-c61eb04a3b71)
+
 
