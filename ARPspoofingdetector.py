@@ -5,19 +5,14 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# Dictionary to store IP to MAC mappings
 ip_mac_mapping = {}
-# Set to keep track of attackers already reported
 reported_attackers = set()
 
-# Define gateway IP and MAC address
-gateway_ip = "192.168.100.1"  # Replace with your gateway IP address
-gateway_mac = "6c:14:6e:e5:a6:f0"  # Replace with your gateway MAC address
+gateway_ip = "192.168.100.1"  
+gateway_mac = "6c:14:6e:e5:a6:f0" 
 
-# File to store attacker details
 log_file = "arp_spoofing_log.txt"
 
-# Email details
 smtp_server = "smtp.gmail.com"
 smtp_port = 587
 email_user = "isaac.kipruto@strathmore.edu"
@@ -70,7 +65,7 @@ def log_attacker(source_ip, source_mac):
         file.write("-" * 40 + "\n")
 
 def arp_display(pkt):
-    if ARP in pkt and pkt[ARP].op == 2:  # is-at (response)
+    if ARP in pkt and pkt[ARP].op == 2: 
         source_ip = pkt[ARP].psrc
         source_mac = pkt[ARP].hwsrc
         destination_mac = pkt[ARP].hwdst
@@ -78,19 +73,19 @@ def arp_display(pkt):
         length = len(pkt)
         info = f"{source_ip} is at {source_mac}"
 
-        # Label as broadcast if destination MAC is 00:00:00:00:00:00
+    
         if destination_mac == '00:00:00:00:00:00':
             destination_mac = 'Broadcast'
 
-        # Signature-based detection for ARP spoofing
+    
         if source_ip == gateway_ip and source_mac != gateway_mac:
             attacker = (source_ip, source_mac)
             if attacker not in reported_attackers:
                 print(f"WARNING: Gateway ARP spoofing detected!")
                 print(f"Gateway IP address {source_ip} is being claimed by MAC address {source_mac}, expected MAC address is {gateway_mac}")
-                log_attacker(source_ip, source_mac)  # Log the attacker details
-                send_email(source_ip, source_mac)  # Send email notification
-                reported_attackers.add(attacker)  # Mark attacker as reported
+                log_attacker(source_ip, source_mac)  
+                send_email(source_ip, source_mac)  
+                reported_attackers.add(attacker) 
         elif source_ip in ip_mac_mapping:
             if source_mac not in ip_mac_mapping[source_ip]:
                 ip_mac_mapping[source_ip].add(source_mac)
@@ -101,8 +96,6 @@ def arp_display(pkt):
 
         print(f"{source_mac:20} {destination_mac:20} {protocol:10} {length:6} {info}")
 
-# Print the header
 print(f"{'Source MAC':20} {'Destination MAC':20} {'Protocol':10} {'Length':6} {'Info'}")
 
-# Start sniffing, filtering only ARP responses
 sniff(prn=arp_display, filter="arp", store=0)
