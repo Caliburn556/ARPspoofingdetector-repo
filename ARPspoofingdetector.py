@@ -11,7 +11,7 @@ reported_attackers = set()
 gateway_ip = "192.168.100.1"  
 gateway_mac = "6c:14:6e:e5:a6:f0" 
 
-log_file = "arp_spoofing_log.txt"
+log_file = "Attackerslogfile.txt"
 
 smtp_server = "smtp.gmail.com"
 smtp_port = 587
